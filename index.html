@@ -34,6 +34,8 @@
             font-size: 0.75rem; color: #666; display: flex; justify-content: space-between;
         }
         .live { color: #d32f2f; font-weight: bold; }
+        .winner { color: #000; font-weight: 900; }
+        .loser { opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -59,7 +61,31 @@
         { id: 7,  name: "Big Ten" },
         { id: 1,  name: "SEC" },
         { id: 62, name: "Big East" },
-        { id: 4,  name: "The American" }
+        { id: 4,  name: "The American" },
+        { id: 10, name: "Atlantic 10" },
+        { id: 3,  name: "ASUN" },
+        { id: 45, name: "America East" },
+        { id: 12, name: "Big Sky" },
+        { id: 5,  name: "Big South" },
+        { id: 13, name: "Big West" },
+        { id: 14, name: "CAA" },
+        { id: 16, name: "C-USA" },
+        { id: 17, name: "Horizon" },
+        | id: 22, name: "Ivy League" },
+        { id: 23, name: "MAAC" },
+        { id: 24, name: "MAC" },
+        { id: 25, name: "MEAC" },
+        { id: 26, name: "Missouri Valley" },
+        { id: 27, name: "NEC" },
+        { id: 28, name: "OVC" },
+        { id: 29, name: "Patriot League" },
+        { id: 30, name: "Southern" },
+        { id: 31, name: "Southland" },
+        { id: 32, name: "SWAC" },
+        { id: 33, name: "Summit League" },
+        { id: 34, name: "Sun Belt" },
+        { id: 43, name: "WAC" },
+        { id: 21, name: "West Coast" }
     ];
 
     const select = document.getElementById('conf-select');
@@ -92,7 +118,7 @@
                 return `
                     <div class="matchup-card">
                         ${game.competitors.map(t => `
-                            <div class="team-row">
+                            <div class="team-row ${t.winner ? 'winner' : (status.state === 'post' ? 'loser' : '')}">
                                 <div class="left-side">
                                     <span class="seed">${t.curatedRank?.current || ''}</span>
                                     <span class="team-name">${t.team.shortDisplayName}</span>
