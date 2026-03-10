@@ -24,6 +24,16 @@ export async function fetchEvents(conf) {
   }
 }
 
+const ROUND_LABEL_MAP = {
+  'Quarterfinal':  'Quarterfinals',
+  'Semifinal':     'Semifinals',
+  'Final':         'Championship Game',
+};
+
+function normalizeRoundLabel(label) {
+  return ROUND_LABEL_MAP[label] ?? label;
+}
+
 /** Transform raw ESPN events into the internal { rounds } bracket structure */
 export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConnectors, feedMap, phantomSlots) {
   if (!events.length) return null;
@@ -38,7 +48,7 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
     if (!roundMap.has(key)) {
       roundMap.set(key, {
         id:    `rnd_${roundMap.size}`,
-        label: note ? note.split(' - ').pop() : key,
+        label: note ? normalizeRoundLabel(note.split(' - ').pop()) : key,
         date:  formatDate(ev.date),
         games: [],
         venue: comp?.venue?.fullName || '',
@@ -200,7 +210,7 @@ function transformEvent(ev, seedsMap) {
   const away    = comps.find(c => c.homeAway === 'away') || comps[1];
 
   const isFinal = status?.name === 'STATUS_FINAL';
-  const isLive  = status?.name === 'STATUS_IN_PROGRESS';
+  const isLive  = status?.state === 'in';
 
   // Sort top/bot by seed so lower seed (better team) is on top.
   // Fall back to away-on-top if seeds are unavailable.
@@ -327,7 +337,7 @@ function teamRecord(competitor) {
 function formatDate(isoDate) {
   if (!isoDate) return '';
   return new Date(isoDate).toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC',
+    weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York',
   });
 }
 

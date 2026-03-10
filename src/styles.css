@@ -28,6 +28,8 @@ body.sidebar-collapsed .sb-toggle{left:0}
 .conf-btn.active .conf-name{color:var(--text)}
 .conf-dates{font-size:10px;color:var(--muted);margin-top:2px;white-space:nowrap;font-family:'Barlow',sans-serif}
 .conf-dates.champion{font-size:12px;color:var(--text);font-weight:600}
+.conf-dates.in-progress{font-size:10px;color:#6b7590;font-weight:700;text-transform:uppercase;letter-spacing:0.05em}
+.conf-live{margin-left:auto;flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:0.1em;color:#fff;background:#e03030;border-radius:3px;padding:2px 5px}
 #main{flex:1;min-width:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
 .site-header{padding:18px 24px 14px;border-bottom:1px solid var(--border);background:linear-gradient(160deg,#d8dce8 0%,var(--bg) 60%);display:flex;flex-direction:column;gap:3px;flex-shrink:0}
 .hdr-sponsor{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-hi)}

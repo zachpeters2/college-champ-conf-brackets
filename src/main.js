@@ -46,7 +46,8 @@ function buildSidebar() {
       <div class="conf-btn-text">
         <div class="conf-name">${conf.name}</div>
         <div class="conf-dates">${conf.dates}</div>
-      </div>`;
+      </div>
+      <span class="conf-live" hidden>LIVE</span>`;
     btn.addEventListener('click', () => switchConf(conf.id));
     list.appendChild(btn);
   });
@@ -64,7 +65,31 @@ function sortSidebar() {
   btns.forEach(btn => list.appendChild(btn));
 }
 
-// ── Champion detection ────────────────────────────────────────
+// ── Champion / round detection ────────────────────────────────
+
+/** Returns the label of the current or next upcoming round, or null if not started. */
+function getCurrentRound(bracketData) {
+  if (!bracketData?.rounds?.length) return null;
+  const rounds = bracketData.rounds;
+
+  // Live round takes priority
+  for (const r of rounds) {
+    if (r.games.some(g => !g.phantom && g.status === 'live')) return r.label;
+  }
+
+  // Walk rounds to find the first incomplete one
+  let anyFinalSeen = false;
+  for (const r of rounds) {
+    const real = r.games.filter(g => !g.phantom);
+    if (!real.length) continue;
+    const allFinal = real.every(g => g.status === 'final');
+    if (allFinal) { anyFinalSeen = true; continue; }
+    // Some games not yet final — show this round if tournament has begun
+    if (anyFinalSeen || real.some(g => g.status === 'final')) return r.label;
+    return null; // No games finished yet anywhere — tournament hasn't started
+  }
+  return null; // All rounds final (champion case handled separately)
+}
 
 function getChampion(bracketData) {
   if (!bracketData?.rounds?.length) return null;
@@ -82,12 +107,23 @@ function updateSidebarChampion(confId, bracketData) {
   const conf    = conferences.find(c => c.id === confId);
   const nameEl  = btn.querySelector('.conf-name');
   const datesEl = btn.querySelector('.conf-dates');
+  const liveEl  = btn.querySelector('.conf-live');
+  if (liveEl) liveEl.hidden = !hasLiveGames(bracketData);
   if (champion) {
     if (nameEl)  nameEl.textContent = `🏆 ${conf?.name ?? confId}`;
-    if (datesEl) { datesEl.textContent = champion; datesEl.classList.add('champion'); }
+    if (datesEl) { datesEl.textContent = champion; datesEl.className = 'conf-dates champion'; }
   } else {
-    if (nameEl)  nameEl.textContent = conf?.name ?? confId;
-    if (datesEl) { datesEl.textContent = conf?.dates ?? ''; datesEl.classList.remove('champion'); }
+    const currentRound = getCurrentRound(bracketData);
+    if (nameEl) nameEl.textContent = conf?.name ?? confId;
+    if (datesEl) {
+      if (currentRound) {
+        datesEl.innerHTML = `<strong>${currentRound}</strong>`;
+        datesEl.className = 'conf-dates in-progress';
+      } else {
+        datesEl.textContent = conf?.dates ?? '';
+        datesEl.className = 'conf-dates';
+      }
+    }
   }
   sortSidebar();
 }

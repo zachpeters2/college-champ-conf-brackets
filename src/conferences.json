@@ -2,7 +2,7 @@
   {
     "id": "hl",
     "name": "Horizon League",
-    "dates": "Mar 2–10",
+    "dates": "Mar 2–10 · Indianapolis, IN",
     "espnGroupId": "45",
     "accent": "#c8a84b",
     "accentHi": "#dfc06a",
@@ -31,7 +31,7 @@
   {
     "id": "ae",
     "name": "America East",
-    "dates": "Mar 7–14",
+    "dates": "Mar 7–14 · Campus Sites",
     "espnGroupId": "1",
     "accent": "#2e6bbf",
     "accentHi": "#5a9de0",
@@ -57,7 +57,7 @@
   {
     "id": "ovc",
     "name": "Ohio Valley",
-    "dates": "Mar 4–7 · COMPLETE",
+    "dates": "Mar 4–7 · Evansville, IN",
     "espnGroupId": "20",
     "accent": "#c84820",
     "accentHi": "#e87040",
@@ -83,7 +83,7 @@
   {
     "id": "asun",
     "name": "ASUN",
-    "dates": "Mar 4–8",
+    "dates": "Mar 4–8 · Jacksonville, FL",
     "espnGroupId": "46",
     "accent": "#1f7a3c",
     "accentHi": "#3dbf6e",
@@ -113,7 +113,7 @@
   {
     "id": "mvc",
     "name": "Missouri Valley",
-    "dates": "Mar 5–8 · Arch Madness",
+    "dates": "Mar 5–8 · St. Louis, MO",
     "espnGroupId": "18",
     "accent": "#991c1c",
     "accentHi": "#c84b4b",
@@ -143,7 +143,7 @@
   {
     "id": "sum",
     "name": "Summit League",
-    "dates": "Mar 4–8 · Sioux Falls",
+    "dates": "Mar 4–8 · Sioux Falls, SD",
     "espnGroupId": "49",
     "accent": "#5a3d8a",
     "accentHi": "#7b5ea7",
@@ -171,7 +171,7 @@
   {
   "id": "mwc",
   "name": "Mountain West",
-  "dates": "Mar 11–14 · Las Vegas",
+  "dates": "Mar 11–14 · Las Vegas, NV",
   "espnGroupId": "44",
   "accent": "#922724",
   "accentHi": "#b53a37",
@@ -201,7 +201,7 @@
 {
   "id": "big-ten",
   "name": "Big Ten",
-  "dates": "Mar 10–15 · Chicago",
+  "dates": "Mar 10–15 · Chicago, IL",
   "espnGroupId": "7",
   "accent": "#00407a",
   "accentHi": "#0056a3",
@@ -224,7 +224,7 @@
 {
   "id": "big-12",
   "name": "Big 12",
-  "dates": "Mar 10–14 · Kansas City",
+  "dates": "Mar 10–14 · Kansas City, MO",
   "espnGroupId": "8",
   "accent": "#ef3e42",
   "accentHi": "#f36a6d",
@@ -245,7 +245,7 @@
 {
   "id": "sec",
   "name": "SEC",
-  "dates": "Mar 11–15 · Nashville",
+  "dates": "Mar 11–15 · Nashville, TN",
   "espnGroupId": "23",
   "accent": "#003366",
   "accentHi": "#004d99",
@@ -266,7 +266,7 @@
 {
   "id": "acc",
   "name": "ACC",
-  "dates": "Mar 10–14 · Charlotte",
+  "dates": "Mar 10–14 · Charlotte, NC",
   "espnGroupId": "2",
   "accent": "#005596",
   "accentHi": "#0072c9",
@@ -288,7 +288,7 @@
 {
   "id": "big-east",
   "name": "Big East",
-  "dates": "Mar 11–14 · New York",
+  "dates": "Mar 11–14 · New York, NY",
   "espnGroupId": "4",
   "accent": "#062136",
   "accentHi": "#0d436e",
@@ -309,7 +309,7 @@
 {
   "id": "aac",
   "name": "American",
-  "dates": "Mar 11–15 · Fort Worth",
+  "dates": "Mar 11–15 · Birmingham, AL",
   "espnGroupId": "62",
   "accent": "#004a98",
   "accentHi": "#005ec1",
@@ -370,7 +370,7 @@
 {
   "id": "sun-belt",
   "name": "Sun Belt",
-  "dates": "Mar 3–9 · Pensacola",
+  "dates": "Mar 3–9 · Pensacola, FL",
   "espnGroupId": "27",
   "accent": "#003a63",
   "accentHi": "#005a9c",
@@ -402,7 +402,7 @@
 {
   "id": "wcc",
   "name": "WCC",
-  "dates": "Mar 5–10 · Las Vegas",
+  "dates": "Mar 5–10 · Las Vegas, NV",
   "espnGroupId": "29",
   "accent": "#002d62",
   "accentHi": "#004b9d",
@@ -432,7 +432,7 @@
 {
   "id": "mac",
   "name": "MAC",
-  "dates": "Mar 12–14 · Cleveland",
+  "dates": "Mar 12–14 · Cleveland, OH",
   "espnGroupId": "14",
   "accent": "#ff5100",
   "accentHi": "#ff7538",
@@ -458,7 +458,7 @@
 {
   "id": "big-south",
   "name": "Big South",
-  "dates": "Mar 4–8 · High Point",
+  "dates": "Mar 4–8 · High Point, NC",
   "espnGroupId": "6",
   "accent": "#000000",
   "accentHi": "#333333",
@@ -486,7 +486,7 @@
 {
   "id": "ivy",
   "name": "Ivy League",
-  "dates": "Mar 14–15 · Ithaca",
+  "dates": "Mar 14–15 · Ithaca, NY",
   "espnGroupId": "12",
   "accent": "#243e5b",
   "accentHi": "#3a5b84",
@@ -540,7 +540,7 @@
 {
   "id": "big-sky",
   "name": "Big Sky",
-  "dates": "Mar 7–11 · Boise",
+  "dates": "Mar 7–11 · Boise, ID",
   "espnGroupId": "5",
   "accent": "#00a1de",
   "accentHi": "#33b4e5",
@@ -569,7 +569,7 @@
 {
   "id": "swac",
   "name": "SWAC",
-  "dates": "Mar 9–14 · Atlanta",
+  "dates": "Mar 9–14 · Atlanta, GA",
   "espnGroupId": "26",
   "accent": "#8a1103",
   "accentHi": "#b31604",
@@ -600,7 +600,7 @@
 {
   "id": "big-west",
   "name": "Big West",
-  "dates": "Mar 11–14 · Henderson",
+  "dates": "Mar 11–14 · Henderson, NV",
   "espnGroupId": "9",
   "accent": "#000000",
   "accentHi": "#222222",
@@ -626,7 +626,7 @@
 {
   "id": "maac",
   "name": "MAAC",
-  "dates": "Mar 5–10 · Atlantic City",
+  "dates": "Mar 5–10 · Atlantic City, NJ",
   "espnGroupId": "13",
   "accent": "#00a1de",
   "accentHi": "#00b5fc",
@@ -655,7 +655,7 @@
 {
   "id": "socon",
   "name": "SoCon",
-  "dates": "Mar 6–9 · Asheville",
+  "dates": "Mar 6–9 · Asheville, NC",
   "espnGroupId": "24",
   "accent": "#003b71",
   "accentHi": "#00519c",
@@ -713,7 +713,7 @@
 {
   "id": "southland",
   "name": "Southland",
-  "dates": "Mar 8–11 · Lake Charles",
+  "dates": "Mar 8–11 · Lake Charles, LA",
   "espnGroupId": "25",
   "accent": "#e31837",
   "accentHi": "#ff1c3d",
@@ -739,7 +739,7 @@
 {
   "id": "wac",
   "name": "WAC",
-  "dates": "Mar 11–14 · Las Vegas",
+  "dates": "Mar 11–14 · Las Vegas, NV",
   "espnGroupId": "30",
   "accent": "#73000a",
   "accentHi": "#9d000d",
@@ -792,7 +792,7 @@
 {
   "id": "meac",
   "name": "MEAC",
-  "dates": "Mar 11–14 · Norfolk",
+  "dates": "Mar 11–14 · Norfolk, VA",
   "espnGroupId": "16",
   "accent": "#ff6d00",
   "accentHi": "#ff8c33",
@@ -818,7 +818,7 @@
 {
   "id": "cusa",
   "name": "Conference USA",
-  "dates": "Mar 10–14 · Huntsville",
+  "dates": "Mar 10–14 · Huntsville, AL",
   "espnGroupId": "11",
   "accent": "#ff0000",
   "accentHi": "#cc0000",
