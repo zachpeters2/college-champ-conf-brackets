@@ -29,6 +29,7 @@ const ftDisc     = document.getElementById('ftDisc');
 const ftLinks    = document.getElementById('ftLinks');
 const sidebar    = document.getElementById('sidebar');
 const sbToggle   = document.getElementById('sbToggle');
+const sbOverlay  = document.getElementById('sbOverlay');
 
 // ── Sidebar: built dynamically from conferences.json ──────────
 
@@ -38,6 +39,7 @@ function buildSidebar() {
     const btn = document.createElement('button');
     btn.className = 'conf-btn';
     btn.dataset.conf = conf.id;
+    btn.title = conf.name;
     btn.style.setProperty('--c-accent', conf.accentHi);
     btn.innerHTML = `
       <div class="conf-dot"></div>
@@ -92,16 +94,48 @@ function updateSidebarChampion(confId, bracketData) {
 
 // ── Status bar ────────────────────────────────────────────────
 
+let statusDismissTimer = null;
+
 function setStatus(type, msg) {
+  clearTimeout(statusDismissTimer);
   statusEl.className = 'status-bar ' + type;
   statusEl.innerHTML = msg;
+  if (type === 'ok') {
+    statusDismissTimer = setTimeout(() => { statusEl.className = 'status-bar'; }, 3000);
+  }
+}
+
+// ── Auto-refresh ──────────────────────────────────────────────
+
+let autoRefreshTimer = null;
+
+function hasLiveGames(bracketData) {
+  return bracketData?.rounds?.some(r => r.games.some(g => g.status === 'live'));
+}
+
+function scheduleAutoRefresh() {
+  clearTimeout(autoRefreshTimer);
+  const data = cache.get(active)?.bracketData;
+  if (!hasLiveGames(data)) return;
+  autoRefreshTimer = setTimeout(async () => {
+    cache.delete(active);
+    const conf = conferences.find(c => c.id === active);
+    if (conf) await loadConf(conf);
+  }, 60_000);
 }
 
 // ── Conference switching ──────────────────────────────────────
 
 async function switchConf(id) {
   if (active === id) return;
+  clearTimeout(autoRefreshTimer);
   active = id;
+  history.replaceState(null, '', '#' + id);
+  const confName = conferences.find(c => c.id === id)?.name ?? 'Conference';
+  document.title = `${confName} Tournament Bracket — 2026`;
+
+  document.getElementById('main').scrollTop = 0;
+  document.querySelector('.bracket-outer').scrollLeft = 0;
 
   const conf = conferences.find(c => c.id === id);
   if (!conf) return;
@@ -125,6 +159,11 @@ async function switchConf(id) {
     btn.classList.toggle('active', btn.dataset.conf === id)
   );
 
+  if (isMobile() && sidebar.classList.contains('mobile-open')) {
+    sidebar.classList.remove('mobile-open');
+    sbOverlay.classList.remove('visible');
+  }
+
   statusEl.className = 'status-bar';
 
   if (cache.has(id)) {
@@ -132,7 +171,7 @@ async function switchConf(id) {
     const cached = cache.get(id);
     render(cached.bracketData, bracketEl, lastUpdEl);
     updateSidebarChampion(id, cached.bracketData);
-    setStatus('ok', '✓ Already fetched this session.');
+    scheduleAutoRefresh();
   } else {
     await loadConf(conf);
   }
@@ -141,7 +180,7 @@ async function switchConf(id) {
 async function loadConf(conf) {
   const refreshBtn = document.querySelector('.refresh-btn');
   if (refreshBtn) { refreshBtn.disabled = true; refreshBtn.innerHTML = '<span class="spinner"></span> Loading…'; }
-  setStatus('info', '<span class="spinner"></span>&nbsp;Fetching bracket data from ESPN…');
+  statusEl.className = 'status-bar'; // hide any previous banner while loading
 
   try {
     const events      = await fetchEvents(conf);
@@ -150,11 +189,16 @@ async function loadConf(conf) {
     cache.set(conf.id, { events, bracketData });
     render(bracketData, bracketEl, lastUpdEl);
     updateSidebarChampion(conf.id, bracketData);
+    scheduleAutoRefresh();
+
+    // Flash live cards to dark briefly to signal the refresh completed
+    bracketEl.classList.remove('refreshed');
+    void bracketEl.offsetWidth; // force reflow so re-adding restarts the transition
+    bracketEl.classList.add('refreshed');
+    setTimeout(() => bracketEl.classList.remove('refreshed'), 5100);
 
     if (!events.length) {
       setStatus('info', 'ℹ No ESPN data found — tournament may not have started yet.');
-    } else {
-      setStatus('ok', `✓ Loaded ${events.length} game(s) from ESPN.`);
     }
   } catch (e) {
     setStatus('error', '⚠ ' + e.message);
@@ -174,13 +218,25 @@ window.refreshScores = async function () {
 
 // ── Sidebar toggle ────────────────────────────────────────────
 
+function isMobile() {
+  return window.matchMedia('(max-width: 640px)').matches;
+}
+
 window.toggleSidebar = function () {
-  sidebar.classList.toggle('collapsed');
-  sbToggle.textContent = sidebar.classList.contains('collapsed') ? '›' : '‹';
+  if (isMobile()) {
+    const isOpen = sidebar.classList.toggle('mobile-open');
+    sbOverlay.classList.toggle('visible', isOpen);
+  } else {
+    const collapsed = sidebar.classList.toggle('collapsed');
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    sbToggle.textContent = collapsed ? '›' : '‹';
+  }
   setTimeout(() => requestAnimationFrame(() => drawConnectors(
     cache.get(active)?.bracketData, bracketEl
-  )), 220);
+  )), 230);
 };
+
+sbOverlay.addEventListener('click', () => toggleSidebar());
 
 // ── Resize handler ────────────────────────────────────────────
 
@@ -213,5 +269,7 @@ async function preloadChampions() {
 // ── Boot ──────────────────────────────────────────────────────
 
 buildSidebar();
-switchConf(conferences[0].id);
+const hashId    = window.location.hash.slice(1);
+const startConf = conferences.find(c => c.id === hashId) ?? conferences[0];
+switchConf(startConf.id);
 preloadChampions();

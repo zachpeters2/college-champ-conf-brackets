@@ -42,7 +42,13 @@ function gameInfoHTML(g) {
         href="https://www.espn.com/mens-college-basketball/game/_/gameId/${g.espnId}/"
         target="_blank" rel="noopener">Preview</a>`
     : '';
-  return `<span class="gtime">${g.time}</span>${net}${preview}`;
+  const liveBox = (g.status === 'live' && g.espnId)
+    ? `<span class="gdot">·</span><a class="gboxscore"
+        href="https://www.espn.com/mens-college-basketball/boxscore/_/gameId/${g.espnId}"
+        target="_blank" rel="noopener"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 8L8 1M8 1H3M8 1V6" stroke="currentColor" stroke-width="1.5"/></svg> Box Score</a>`
+    : '';
+  const timeClass = g.status === 'live' ? 'gtime gtime--live' : 'gtime';
+  return `<span class="${timeClass}">${g.time}</span>${net}${liveBox}${preview}`;
 }
 
 function cardHTML(g) {
@@ -93,7 +99,6 @@ export function render(data, bracketEl, lastUpdEl) {
   <div class="rnd-hdr">
     <div class="rnd-name">${r.label}</div>
     <div class="rnd-date">${r.date}</div>
-    <div class="rnd-venue">${r.venue}</div>
     ${note}
   </div>
   <div class="cards-area${splitClass}">${cardsHTML}</div>

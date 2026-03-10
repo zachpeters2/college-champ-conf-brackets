@@ -19,16 +19,18 @@
 </head>
 <body>
 
+<div id="sbOverlay"></div>
+<button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()">‹</button>
 <nav id="sidebar">
   <div class="sb-header">
     <span class="sb-title">Conferences</span>
-    <button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()">‹</button>
   </div>
   <!-- Sidebar buttons are injected by main.js from conferences.json -->
   <div id="confList"></div>
 </nav>
 
 <div id="main">
+  <button class="sb-hamburger" id="sbHamburger" onclick="toggleSidebar()">☰</button>
   <header class="site-header">
     <div class="hdr-sponsor" id="hdrSponsor"></div>
     <h1 class="hdr-title"   id="hdrTitle"></h1>

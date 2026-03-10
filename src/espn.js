@@ -38,7 +38,7 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
     if (!roundMap.has(key)) {
       roundMap.set(key, {
         id:    `rnd_${roundMap.size}`,
-        label: note || key,
+        label: note ? note.split(' - ').pop() : key,
         date:  formatDate(ev.date),
         games: [],
         venue: comp?.venue?.fullName || '',
@@ -259,7 +259,9 @@ else {
     botScore,
     status: isFinal ? 'final' : isLive ? 'live' : 'upcoming',
     winner,
-    time:   formatTime(ev.date),
+    time:   isLive
+      ? (comp?.status?.type?.shortDetail ?? comp?.status?.type?.detail ?? formatTime(ev.date))
+      : formatTime(ev.date),
     net:    broadcast,
   };
 }
