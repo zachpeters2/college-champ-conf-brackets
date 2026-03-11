@@ -25,6 +25,12 @@
   <div class="sb-header">
     <span class="sb-title">Conferences</span>
   </div>
+  <div class="sb-filters">
+    <button class="sb-filter-btn" id="filterAlpha" onclick="cycleAlphaSort()">A–Z</button>
+    <button class="sb-filter-btn" id="filterLive" onclick="cycleLiveFilter()">Live</button>
+    <button class="sb-filter-btn" id="filterToday" onclick="cycleTodayFilter()">Today</button>
+    <button class="sb-filter-btn" id="filterChamp" onclick="cycleChampFilter()">🏆</button>
+  </div>
   <!-- Sidebar buttons are injected by main.js from conferences.json -->
   <div id="confList"></div>
 </nav>

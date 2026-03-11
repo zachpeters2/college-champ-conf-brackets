@@ -15,6 +15,33 @@ import { render, alignBracket, alignSplitGaps, drawConnectors } from './render.j
 
 const cache   = new Map();   // conf.id → { events, bracketData }
 let   active  = null;        // currently displayed conf
+let   sortMode = 'az';       // 'az' | 'za'
+let   liveMode    = null;  // null | 'live' | 'not-live'
+let   todayMode   = null;  // null | 'today' | 'not-today'
+let   champMode   = null;  // null | 'champion' | 'not-champion'
+const confsWithGameToday = new Set();  // populated as events load
+
+// ── Persistent champion cache (localStorage) ──────────────────
+// Champions are final once crowned — no need to re-fetch them.
+
+const CHAMP_STORE = 'conf-champions-v1';
+
+function loadChampionStore() {
+  try { return JSON.parse(localStorage.getItem(CHAMP_STORE) || '{}'); } catch { return {}; }
+}
+
+function saveChampion(confId, championName) {
+  try {
+    const store = loadChampionStore();
+    if (store[confId] === championName) return; // already saved
+    store[confId] = championName;
+    localStorage.setItem(CHAMP_STORE, JSON.stringify(store));
+  } catch {}
+}
+
+function getCachedChampion(confId) {
+  return loadChampionStore()[confId] ?? null;
+}
 
 // ── DOM refs ──────────────────────────────────────────────────
 
@@ -35,17 +62,19 @@ const sbOverlay  = document.getElementById('sbOverlay');
 
 function buildSidebar() {
   const list = document.getElementById('confList');
+  const storedChamps = loadChampionStore();
   conferences.forEach(conf => {
     const btn = document.createElement('button');
     btn.className = 'conf-btn';
     btn.dataset.conf = conf.id;
     btn.title = conf.name;
     btn.style.setProperty('--c-accent', conf.accentHi);
+    const cachedChamp = storedChamps[conf.id];
     btn.innerHTML = `
       <div class="conf-dot"></div>
       <div class="conf-btn-text">
-        <div class="conf-name">${conf.name}</div>
-        <div class="conf-dates">${conf.dates}</div>
+        <div class="conf-name">${cachedChamp ? `🏆 ${conf.name}` : conf.name}</div>
+        <div class="conf-dates${cachedChamp ? ' champion' : ''}">${cachedChamp ?? conf.dates}</div>
       </div>
       <span class="conf-live" hidden>LIVE</span>`;
     btn.addEventListener('click', () => switchConf(conf.id));
@@ -60,10 +89,57 @@ function sortSidebar() {
   btns.sort((a, b) => {
     const aName = conferences.find(c => c.id === a.dataset.conf)?.name ?? '';
     const bName = conferences.find(c => c.id === b.dataset.conf)?.name ?? '';
-    return aName.localeCompare(bName);
+    return sortMode === 'az' ? aName.localeCompare(bName) : bName.localeCompare(aName);
   });
   btns.forEach(btn => list.appendChild(btn));
 }
+
+window.cycleAlphaSort = function () {
+  const btn = document.getElementById('filterAlpha');
+  if (sortMode === 'az') { sortMode = 'za'; btn.textContent = 'Z–A'; }
+  else                   { sortMode = 'az'; btn.textContent = 'A–Z'; }
+  sortSidebar();
+};
+
+function applyFilters() {
+  const anyActive = liveMode !== null || todayMode !== null || champMode !== null;
+  document.querySelectorAll('.conf-btn').forEach(btn => {
+    const id = btn.dataset.conf;
+    if (!anyActive) { btn.style.display = ''; return; }
+    const isChamp = !!(getCachedChampion(id) || getChampion(cache.get(id)?.bracketData));
+    const isLive  = hasLiveGames(cache.get(id)?.bracketData);
+    const isToday = confsWithGameToday.has(id);
+    const visible =
+      (liveMode  === null || (liveMode  === 'live'     ? isLive  : !isLive))  &&
+      (todayMode === null || (todayMode === 'today'    ? isToday : !isToday)) &&
+      (champMode === null || (champMode === 'champion' ? isChamp : !isChamp));
+    btn.style.display = visible ? '' : 'none';
+  });
+}
+
+window.cycleLiveFilter = function () {
+  const btn = document.getElementById('filterLive');
+  if (liveMode === null)       { liveMode = 'live';     btn.classList.add('active'); btn.classList.remove('negated'); }
+  else if (liveMode === 'live') { liveMode = 'not-live'; btn.classList.add('negated'); }
+  else                          { liveMode = null;       btn.classList.remove('active', 'negated'); }
+  applyFilters();
+};
+
+window.cycleTodayFilter = function () {
+  const btn = document.getElementById('filterToday');
+  if (todayMode === null)        { todayMode = 'today';     btn.classList.add('active'); btn.classList.remove('negated'); }
+  else if (todayMode === 'today') { todayMode = 'not-today'; btn.classList.add('negated'); }
+  else                            { todayMode = null;        btn.classList.remove('active', 'negated'); }
+  applyFilters();
+};
+
+window.cycleChampFilter = function () {
+  const btn = document.getElementById('filterChamp');
+  if (champMode === null)           { champMode = 'champion';     btn.classList.add('active'); btn.classList.remove('negated'); }
+  else if (champMode === 'champion') { champMode = 'not-champion'; btn.classList.add('negated'); }
+  else                               { champMode = null;           btn.classList.remove('active', 'negated'); }
+  applyFilters();
+};
 
 // ── Champion / round detection ────────────────────────────────
 
@@ -102,6 +178,7 @@ function getChampion(bracketData) {
 
 function updateSidebarChampion(confId, bracketData) {
   const champion = getChampion(bracketData);
+  if (champion) saveChampion(confId, champion);
   const btn = document.querySelector(`.conf-btn[data-conf="${confId}"]`);
   if (!btn) return;
   const conf    = conferences.find(c => c.id === confId);
@@ -147,6 +224,11 @@ let autoRefreshTimer = null;
 
 function hasLiveGames(bracketData) {
   return bracketData?.rounds?.some(r => r.games.some(g => g.status === 'live'));
+}
+
+function hasGameToday(events) {
+  const today = new Date().toDateString();
+  return events.some(e => e.date && new Date(e.date).toDateString() === today);
 }
 
 function scheduleAutoRefresh() {
@@ -223,6 +305,7 @@ async function loadConf(conf) {
     const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null);
 
     cache.set(conf.id, { events, bracketData });
+    if (hasGameToday(events)) confsWithGameToday.add(conf.id);
     render(bracketData, bracketEl, lastUpdEl);
     updateSidebarChampion(conf.id, bracketData);
     scheduleAutoRefresh();
@@ -293,11 +376,14 @@ window.addEventListener('resize', () => {
 async function preloadChampions() {
   for (const conf of conferences) {
     if (cache.has(conf.id)) continue;
+    if (getCachedChampion(conf.id)) continue; // already final — skip API call
     try {
       const events      = await fetchEvents(conf);
       const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null);
       cache.set(conf.id, { events, bracketData });
+      if (hasGameToday(events)) confsWithGameToday.add(conf.id);
       updateSidebarChampion(conf.id, bracketData);
+      applyFilters();
     } catch {}
   }
 }
@@ -305,6 +391,7 @@ async function preloadChampions() {
 // ── Boot ──────────────────────────────────────────────────────
 
 buildSidebar();
+document.getElementById('filterAlpha')?.classList.add('active');
 const hashId    = window.location.hash.slice(1);
 const startConf = conferences.find(c => c.id === hashId) ?? conferences[0];
 switchConf(startConf.id);
