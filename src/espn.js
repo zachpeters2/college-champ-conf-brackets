@@ -47,11 +47,12 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
 
     if (!roundMap.has(key)) {
       roundMap.set(key, {
-        id:    `rnd_${roundMap.size}`,
-        label: note ? normalizeRoundLabel(note.split(' - ').pop()) : key,
-        date:  formatDate(ev.date),
-        games: [],
-        venue: comp?.venue?.fullName || '',
+        id:      `rnd_${roundMap.size}`,
+        label:   note ? normalizeRoundLabel(note.split(' - ').pop()) : key,
+        date:    formatDate(ev.date),
+        isoDate: ev.date ? new Date(ev.date).toLocaleDateString('en-CA') : null,
+        games:   [],
+        venue:   comp?.venue?.fullName || '',
       });
     }
     roundMap.get(key).games.push(transformEvent(ev, seedsMap));
@@ -101,6 +102,24 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
       const rankB = posB !== -1 ? posB : (b.top.seed ?? Infinity) + 1000;
       return rankA - rankB;
     });
+  });
+
+  // Detect rounds whose games span multiple calendar days; annotate with date range + per-game date
+  const longDate  = raw => new Date(raw).toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York',
+  });
+  const shortDate = raw => new Date(raw).toLocaleDateString('en-US', {
+    month: 'short', day: 'numeric', timeZone: 'America/New_York',
+  });
+  rounds.forEach(r => {
+    const dated = r.games.filter(g => g._rawDate);
+    const localDates = [...new Set(
+      dated.map(g => new Date(g._rawDate).toLocaleDateString('en-CA', { timeZone: 'America/New_York' }))
+    )].sort();
+    if (localDates.length > 1) {
+      r.date = `${longDate(localDates[0] + 'T12:00:00')} – ${longDate(localDates[localDates.length - 1] + 'T12:00:00')}`;
+      dated.forEach(g => { g.gameDate = shortDate(g._rawDate); });
+    }
   });
 
   // Clean up internal sort key

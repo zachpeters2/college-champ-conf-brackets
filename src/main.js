@@ -154,14 +154,20 @@ function getCurrentRound(bracketData) {
   }
 
   // Walk rounds to find the first incomplete one
-  let anyFinalSeen = false;
+  let lastCompletedLabel = null;
   for (const r of rounds) {
     const real = r.games.filter(g => !g.phantom);
     if (!real.length) continue;
     const allFinal = real.every(g => g.status === 'final');
-    if (allFinal) { anyFinalSeen = true; continue; }
-    // Some games not yet final — show this round if tournament has begun
-    if (anyFinalSeen || real.some(g => g.status === 'final')) return r.label;
+    if (allFinal) { lastCompletedLabel = r.label; continue; }
+    const anyStarted = real.some(g => g.status === 'final' || g.status === 'live');
+    // Next round exists but hasn't started — show as complete unless it's today
+    if (lastCompletedLabel && !anyStarted) {
+      const todayLocal = new Date().toLocaleDateString('en-CA');
+      if (r.isoDate === todayLocal) return r.label;
+      return `${lastCompletedLabel} Complete`;
+    }
+    if (lastCompletedLabel || anyStarted) return r.label;
     return null; // No games finished yet anywhere — tournament hasn't started
   }
   return null; // All rounds final (champion case handled separately)
@@ -194,8 +200,9 @@ function updateSidebarChampion(confId, bracketData) {
     if (nameEl) nameEl.textContent = conf?.name ?? confId;
     if (datesEl) {
       if (currentRound) {
+        const isComplete = currentRound.endsWith(' Complete');
         datesEl.innerHTML = `<strong>${currentRound}</strong>`;
-        datesEl.className = 'conf-dates in-progress';
+        datesEl.className = isComplete ? 'conf-dates round-complete' : 'conf-dates in-progress';
       } else {
         datesEl.textContent = conf?.dates ?? '';
         datesEl.className = 'conf-dates';
@@ -234,12 +241,16 @@ function hasGameToday(events) {
 function scheduleAutoRefresh() {
   clearTimeout(autoRefreshTimer);
   const data = cache.get(active)?.bracketData;
-  if (!hasLiveGames(data)) return;
+  const isLive = hasLiveGames(data);
+  const hasTodayUnfinished = confsWithGameToday.has(active) && !getChampion(data);
+
+  if (!isLive && !hasTodayUnfinished) return;
+  const delay = isLive ? 60_000 : 5 * 60_000;
   autoRefreshTimer = setTimeout(async () => {
     cache.delete(active);
     const conf = conferences.find(c => c.id === active);
     if (conf) await loadConf(conf);
-  }, 60_000);
+  }, delay);
 }
 
 // ── Conference switching ──────────────────────────────────────
@@ -314,7 +325,7 @@ async function loadConf(conf) {
     bracketEl.classList.remove('refreshed');
     void bracketEl.offsetWidth; // force reflow so re-adding restarts the transition
     bracketEl.classList.add('refreshed');
-    setTimeout(() => bracketEl.classList.remove('refreshed'), 5100);
+    setTimeout(() => bracketEl.classList.remove('refreshed'), 2100);
 
     if (!events.length) {
       setStatus('info', 'ℹ No ESPN data found — tournament may not have started yet.');

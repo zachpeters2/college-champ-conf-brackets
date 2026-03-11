@@ -48,7 +48,10 @@ function gameInfoHTML(g) {
         target="_blank" rel="noopener"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 8L8 1M8 1H3M8 1V6" stroke="currentColor" stroke-width="1.5"/></svg> Box Score</a>`
     : '';
   const timeClass = g.status === 'live' ? 'gtime gtime--live' : 'gtime';
-  return `<span class="${timeClass}">${g.time}</span>${net}${liveBox}${preview}`;
+  const timeText = (g.status === 'upcoming' && g.gameDate)
+    ? `${g.gameDate} · ${g.time}`
+    : g.time;
+  return `<span class="${timeClass}">${timeText}</span>${net}${liveBox}${preview}`;
 }
 
 function cardHTML(g) {

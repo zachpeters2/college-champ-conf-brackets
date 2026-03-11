@@ -34,6 +34,7 @@ body.sidebar-collapsed .sb-toggle{left:0}
 .conf-dates{font-size:10px;color:var(--muted);margin-top:2px;white-space:nowrap;font-family:'Barlow',sans-serif}
 .conf-dates.champion{font-size:12px;color:var(--text);font-weight:600}
 .conf-dates.in-progress{font-size:10px;color:#6b7590;font-weight:700;text-transform:uppercase;letter-spacing:0.05em}
+.conf-dates.round-complete{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.05em;opacity:0.7}
 .conf-live{margin-left:auto;flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:0.1em;color:#fff;background:#e03030;border-radius:3px;padding:2px 5px}
 #main{flex:1;min-width:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
 .site-header{padding:18px 24px 14px;border-bottom:1px solid var(--border);background:linear-gradient(160deg,#d8dce8 0%,var(--bg) 60%);display:flex;flex-direction:column;gap:3px;flex-shrink:0}
@@ -85,9 +86,9 @@ body.sidebar-collapsed .sb-toggle{left:0}
 .trow.live::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#f97316;animation:live-pulse 1.4s ease-in-out infinite}
 .trow.live .tscore{color:var(--text)}
 @keyframes live-flash{0%{color:#ea580c}100%{color:var(--text)}}
-.bracket.refreshed .trow.live .tscore{animation:live-flash 5s ease forwards}
-.bracket.refreshed .trow.live .tname{animation:live-flash 5s ease forwards}
-.bracket.refreshed .gtime--live{animation:live-flash 5s ease forwards}
+.bracket.refreshed .trow.live .tscore{animation:live-flash 2s ease forwards}
+.bracket.refreshed .trow.live .tname{animation:live-flash 2s ease forwards}
+.bracket.refreshed .gtime--live{animation:live-flash 2s ease forwards}
 .ginfo{height:var(--info-h);display:flex;align-items:center;justify-content:center;gap:7px;border-top:1px solid var(--border);background:var(--surface2);padding:0 8px}
 .gtime{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted)}
 .gtime--live{font-size:11px;font-weight:700;color:var(--text);letter-spacing:0.05em}
