@@ -35,7 +35,7 @@ function normalizeRoundLabel(label) {
 }
 
 /** Transform raw ESPN events into the internal { rounds } bracket structure */
-export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConnectors, feedMap, phantomSlots) {
+export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConnectors, feedMap, phantomSlots, bracketSlots) {
   if (!events.length) return null;
 
   // Group events by round label from ESPN
@@ -63,15 +63,16 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
     (a.games[0]?._rawDate ?? '').localeCompare(b.games[0]?._rawDate ?? '')
   );
 
-  // If roundSlotOrder is provided, merge consecutive ESPN rounds until each
-  // round's game count matches the expected count from roundSlotOrder.
+  // If bracketSlots (preferred) or roundSlotOrder is provided, merge consecutive
+  // ESPN rounds until each round's game count matches the expected slot count.
   // This handles cases where ESPN splits one logical round across multiple
   // date/label groups (e.g. campus-site QFs on two different days).
-  if (roundSlotOrder && rounds.length > roundSlotOrder.length) {
+  const slotConfig = bracketSlots ?? roundSlotOrder;
+  if (slotConfig && rounds.length > slotConfig.length) {
     let rso = 0;
     let i = 0;
-    while (i < rounds.length && rso < roundSlotOrder.length) {
-      const expected = roundSlotOrder[rso].length;
+    while (i < rounds.length && rso < slotConfig.length) {
+      const expected = slotConfig[rso].length;
       while (rounds[i].games.length < expected && i + 1 < rounds.length) {
         const next = rounds[i + 1];
         // Combine date strings when the two groups span different days
@@ -91,9 +92,43 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
   }
 
   // Within each round, order games by bracket slot position.
-  // If a roundSlotOrder entry exists for this round index, use it (explicit bracket position).
-  // Otherwise fall back to ascending seed (correct for re-seeded and step-ladder formats).
+  //
+  // If bracketSlots[ri] is defined (preferred): use seed-set matching.
+  //   Each slot is an array of ALL seeds that could appear there. A game is
+  //   assigned to the slot with the most seed overlap. This is robust to upsets
+  //   and partial advancement — no need to enumerate every possible upset seed.
+  //
+  // Otherwise fall back to roundSlotOrder (legacy): sort by indexOf(top.seed).
   rounds.forEach((r, ri) => {
+    const slots = bracketSlots?.[ri] ?? null;
+
+    if (slots) {
+      // Seed-set matching: assign each game to the slot containing its seeds
+      const result = new Array(slots.length).fill(null);
+      const unplaced = [];
+
+      r.games.forEach(game => {
+        const seeds = [game.top.seed, game.bot.seed].filter(s => s != null);
+        let bestSlot = -1, bestScore = 0;
+        for (let si = 0; si < slots.length; si++) {
+          if (result[si] !== null) continue;
+          const score = seeds.filter(s => slots[si].includes(s)).length;
+          if (score > bestScore) { bestScore = score; bestSlot = si; }
+        }
+        if (bestSlot !== -1) result[bestSlot] = game;
+        else unplaced.push(game);
+      });
+
+      // Fill remaining gaps (TBD vs TBD games) in original order
+      let ui = 0;
+      for (let i = 0; i < slots.length && ui < unplaced.length; i++) {
+        if (result[i] === null) result[i] = unplaced[ui++];
+      }
+      r.games = result.filter(Boolean);
+      return;
+    }
+
+    // Legacy: sort by roundSlotOrder indexOf(top.seed)
     const slotOrder = roundSlotOrder?.[ri] ?? null;
     r.games.sort((a, b) => {
       const posA = slotOrder ? slotOrder.indexOf(a.top.seed ?? -1) : -1;

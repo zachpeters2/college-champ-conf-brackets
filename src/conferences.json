@@ -13,32 +13,12 @@
     "footerDisc": "Early Rounds on ACCN/ESPN/2 · Semifinals & Championship on ESPN",
     "footerLinks": "TheACC.com &nbsp;|&nbsp; #ACCBMNT &nbsp;|&nbsp; @theACC",
     "espnDateRange": "20260310-20260314",
-    "roundSlotOrder": [
-      [
-        0,
-        12,
-        11,
-        10
-      ],
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[12,13], [11,14], [10,15]],
+      [[8,9], [5,12,13], [6,11,14], [7,10,15]],
+      [[1,8,9], [4,5,12,13], [3,6,11,14], [2,7,10,15]],
+      [[1,4,5,8,9,12,13], [2,3,6,7,10,11,14,15]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]]
     ],
     "phantomSlots": [
       [
@@ -78,22 +58,10 @@
     "footerDisc": "All games on ESPN+ · Championship on ESPN2, Sat Mar 14, 11 A.M. ET · Higher seed hosts every round",
     "footerLinks": "AmericaEast.com &nbsp;|&nbsp; #AEPlayoffs &nbsp;|&nbsp; @AmericaEast",
     "espnDateRange": "20260307-20260314",
-    "roundSlotOrder": [
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[1,8], [4,5], [3,6], [2,7]],
+      [[1,4,5,8], [2,3,6,7]],
+      [[1,2,3,4,5,6,7,8]]
     ],
     "seeds": {
       "UMBC": 1,
@@ -122,26 +90,12 @@
     "footerDisc": "First Round on ESPN+ · Quarterfinals & Semifinals on ESPN2/U · Championship on ESPN",
     "footerLinks": "TheAmerican.org &nbsp;|&nbsp; #AmericanMBB &nbsp;|&nbsp; @American_Conf",
     "espnDateRange": "20260311-20260315",
-    "roundSlotOrder": [
-      [
-        8,
-        7
-      ],
-      [
-        5,
-        6
-      ],
-      [
-        4,
-        3
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9],[7,10]],
+      [[5,8,9],[6,7,10]],
+      [[4,5,8,9],[3,6,7,10]],
+      [[1,4,5,8,9],[2,3,6,7,10]],
+      [[1,2,3,4,5,6,7,8,9,10]]
     ],
     "seeds": {
       "South Florida": 1,
@@ -171,26 +125,11 @@
     "footerDisc": "First Round at UNF Arena & Swisher Gymnasium · QF through Championship at VyStar Veterans Memorial Arena",
     "footerLinks": "ASUNSports.org &nbsp;|&nbsp; #ASUNMBB &nbsp;|&nbsp; @ASUNSports",
     "espnDateRange": "20260304-20260308",
-    "roundSlotOrder": [
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9], [5,12], [6,11], [7,10]],
+      [[1,8,9], [4,5,12], [3,6,11], [2,7,10]],
+      [[1,4,5,8,9,12], [2,3,6,7,10,11]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12]]
     ],
     "seeds": {
       "Central Arkansas": 1,
@@ -228,34 +167,12 @@
     "footerDisc": "Early Rounds & Quarterfinals on USA/CNBC · Semifinals on CBS Sports Network · Championship on CBS",
     "footerLinks": "Atlantic10.com | #A10MBB | @A10MBB",
     "espnDateRange": "20260311-20260315",
-    "roundSlotOrder": [
-      [
-        0,
-        12,
-        11,
-        0
-      ],
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[12,13], [11,14]],
+      [[8,9], [5,12,13], [6,11,14], [7,10]],
+      [[1,8,9], [4,5,12,13], [3,6,11,14], [2,7,10]],
+      [[1,4,5,8,9,12,13], [2,3,6,7,10,11,14]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13,14]]
     ],
     "phantomSlots": [
       [
@@ -298,32 +215,12 @@
     "footerDisc": "All Games on ESPN/2/U/+",
     "footerLinks": "Big12Sports.com &nbsp;|&nbsp; #Big12MBB &nbsp;|&nbsp; @Big12Conference",
     "espnDateRange": "20260310-20260314",
-    "roundSlotOrder": [
-      [
-        9,
-        12,
-        11,
-        10
-      ],
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[9,16], [12,13], [11,14], [10,15]],
+      [[8,9,16], [5,12,13], [6,11,14], [7,10,15]],
+      [[1,8,9,16], [4,5,12,13], [3,6,11,14], [2,7,10,15]],
+      [[1,4,5,8,9,12,13,16], [2,3,6,7,10,11,14,15]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]]
     ],
     "seeds": {
       "Arizona": 1,
@@ -358,25 +255,11 @@
     "footerDisc": "First Round & QF on FS1/Peacock · Semifinals & Championship on FOX",
     "footerLinks": "BigEast.com &nbsp;|&nbsp; #BIGEASTmbb &nbsp;|&nbsp; @BIGEASTMBB",
     "espnDateRange": "20260311-20260314",
-    "roundSlotOrder": [
-      [
-        8,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9], [6,11], [7,10]],
+      [[1,8,9], [4,5], [3,6,11], [2,7,10]],
+      [[1,4,5,8,9], [2,3,6,7,10,11]],
+      [[1,2,3,4,5,6,7,8,9,10,11]]
     ],
     "phantomSlots": [
       [
@@ -468,26 +351,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Championship on ESPN2",
     "footerLinks": "BigSouthSports.com | #BigSouthMBB | @BigSouthConf",
     "espnDateRange": "20260304-20260308",
-    "roundSlotOrder": [
-      [
-        8,
-        9
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9]],
+      [[1,8,9], [4,5], [3,6], [2,7]],
+      [[1,4,5,8,9], [2,3,6,7]],
+      [[1,2,3,4,5,6,7,8,9]]
     ],
     "phantomSlots": [
       [
@@ -529,38 +397,13 @@
     "footerDisc": "Early Rounds on BTN/Peacock · Semifinals & Championship on CBS",
     "footerLinks": "BigTen.org &nbsp;|&nbsp; #B1GMBB &nbsp;|&nbsp; @BigTen",
     "espnDateRange": "20260310-20260315",
-    "roundSlotOrder": [
-      [
-        16,
-        0,
-        0,
-        15
-      ],
-      [
-        9,
-        12,
-        11,
-        10
-      ],
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[16,17], [15,18]],
+      [[9,16,17], [12,13], [11,14], [10,15,18]],
+      [[8,9,16,17], [5,12,13], [6,11,14], [7,10,15,18]],
+      [[1,8,9,16,17], [4,5,12,13], [3,6,11,14], [2,7,10,15,18]],
+      [[1,4,5,8,9,12,13,16,17], [2,3,6,7,10,11,14,15,18]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]]
     ],
     "phantomSlots": [
       [
@@ -607,28 +450,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Semifinals on ESPNU/ESPN2 · Championship on ESPN2",
     "footerLinks": "BigWest.org | #BigWestMBB | @BigWestSports",
     "espnDateRange": "20260311-20260314",
-    "roundSlotOrder": [
-      [
-        5,
-        8,
-        6,
-        7
-      ],
-      [
-        4,
-        5,
-        3,
-        6
-      ],
-      [
-        1,
-        4,
-        2,
-        3
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[5,8],[6,7]],
+      [[4,5,8],[3,6,7]],
+      [[1,4,5,8],[2,3,6,7]],
+      [[1,2,3,4,5,6,7,8]]
     ],
     "seeds": {
       "UC Irvine": 1,
@@ -655,31 +481,12 @@
     "footerDisc": "Early Rounds on FloCollege · Semifinals & Championship on CBS Sports Network",
     "footerLinks": "CAASports.com | #CAAHoops | @CAABasketball",
     "espnDateRange": "20260306-20260310",
-    "roundSlotOrder": [
-      [
-        12
-      ],
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        4,
-        2,
-        3
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[12,13]],
+      [[8,9], [5,12,13], [6,11], [7,10]],
+      [[1,8,9], [4,5,12,13], [3,6,11], [2,7,10]],
+      [[1,4,5,8,9,12,13], [2,3,6,7,10,11]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13]]
     ],
     "phantomSlots": [
       [
@@ -725,28 +532,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Semifinals & Championship on CBS Sports Network",
     "footerLinks": "ConferenceUSA.com | #CUSAMBB | @ConferenceUSA",
     "espnDateRange": "20260310-20260314",
-    "roundSlotOrder": [
-      [
-        8,
-        9,
-        7,
-        10
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1, 9,
-        4, 5,
-        2, 7,
-        3, 6
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9], [7,10]],
+      [[1,8,9], [4,5], [3,6], [2,7,10]],
+      [[1,4,5,8,9], [2,3,6,7,10]],
+      [[1,2,3,4,5,6,7,8,9,10]]
     ],
     "phantomSlots": [
       [
@@ -844,16 +634,9 @@
     "footerDisc": "Semifinals on ESPNU/ESPNews · Championship on ESPN2",
     "footerLinks": "IvyLeague.com | #IvyMadness | @IvyLeague",
     "espnDateRange": "20260314-20260315",
-    "roundSlotOrder": [
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[1,4], [2,3]],
+      [[1,2,3,4]]
     ],
     "seeds": {
       "Yale": 1,
@@ -876,24 +659,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Championship on ESPN2",
     "footerLinks": "MAACSports.com | #MAACHoops | @MAACHoops",
     "espnDateRange": "20260305-20260310",
-    "roundSlotOrder": [
-      [
-        8,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        3
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9],[7,10]],
+      [[1,8,9],[4,5],[3,6],[2,7,10]],
+      [[1,4,5,8,9],[2,3,6,7,10]],
+      [[1,2,3,4,5,6,7,8,9,10]]
     ],
     "phantomSlots": [
       [
@@ -932,22 +702,10 @@
     "footerDisc": "Quarterfinals on ESPN+ · Semifinals on CBS Sports Network · Championship on ESPN2",
     "footerLinks": "GetSomeMACtion.com | #MACtion | @MACSports",
     "espnDateRange": "20260312-20260314",
-    "roundSlotOrder": [
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[1,8], [4,5], [3,6], [2,7]],
+      [[1,4,5,8], [2,3,6,7]],
+      [[1,2,3,4,5,6,7,8]]
     ],
     "seeds": {
       "Miami OH": 1,
@@ -974,22 +732,10 @@
     "footerDisc": "Early Rounds on ESPN+ · Championship on ESPN2",
     "footerLinks": "MEACSports.com | #MEACMBB | @MEACSports",
     "espnDateRange": "20260311-20260314",
-    "roundSlotOrder": [
-      [
-        0,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[4,5],[3,6],[2,7]],
+      [[1,4,5],[2,3,6,7]],
+      [[1,2,3,4,5,6,7]]
     ],
     "phantomSlots": [
       [
@@ -1021,31 +767,16 @@
     "footerDisc": "R1 & QF on ESPN+ · Semifinals on CBS Sports Network · Championship on CBS/Paramount+",
     "footerLinks": "MVC-Sports.com &nbsp;|&nbsp; #ArchMadness &nbsp;|&nbsp; @MVCsports",
     "espnDateRange": "20260305-20260308",
-    "roundSlotOrder": [
-      [
-        8,
-        0,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        5,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9],[6,11],[7,10]],
+      [[1,8,9],[4,5],[3,6,11],[2,7,10]],
+      [[1,4,5,8,9],[2,3,6,7,10,11]],
+      [[1,2,3,4,5,6,7,8,9,10,11]]
     ],
     "phantomSlots": [
       [
         0,
-        3
+        1
       ]
     ],
     "seeds": {
@@ -1085,26 +816,11 @@
     "footerDisc": "First Round on MW Network · Quarterfinals & Semifinals on CBS Sports Network · Championship on CBS",
     "footerLinks": "TheMW.com &nbsp;|&nbsp; #MWMBB &nbsp;|&nbsp; @MW_OlySports",
     "espnDateRange": "20260311-20260314",
-    "roundSlotOrder": [
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9],[5,12],[6,11],[7,10]],
+      [[1,8,9],[4,5,12],[3,6,11],[2,7,10]],
+      [[1,4,5,8,9,12],[2,3,6,7,10,11]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12]]
     ],
     "seeds": {
       "Utah State": 1,
@@ -1178,22 +894,11 @@
     "footerDisc": "All games at Ford Center, Evansville, IN · Stepladder format: seeds 1 & 2 receive double bye to semifinals",
     "footerLinks": "OVCSports.com &nbsp;|&nbsp; #OVCTournament &nbsp;|&nbsp; @OVCSports",
     "espnDateRange": "20260304-20260307",
-    "roundSlotOrder": [
-      [
-        5,
-        6
-      ],
-      [
-        4,
-        3
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[5,8],[6,7]],
+      [[4,5,8],[3,6,7]],
+      [[1,4,5,8],[2,3,6,7]],
+      [[1,2,3,4,5,6,7,8]]
     ],
     "seeds": {
       "Tennessee State": 1,
@@ -1228,28 +933,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Semifinals & Championship on CBS Sports Network",
     "footerLinks": "PatriotLeague.org | #PatriotMBB | @PatriotLeague",
     "espnDateRange": "20260303-20260311",
-    "roundSlotOrder": [
-      [
-        8,
-        9,
-        7,
-        10
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        4,
-        1,
-        2,
-        3
-      ],
-      [
-        2
-      ]
+    "bracketSlots": [
+      [[8,9],[7,10]],
+      [[1,8,9],[4,5],[3,6],[2,7,10]],
+      [[1,4,5,8,9],[2,3,6,7,10]],
+      [[1,2,3,4,5,6,7,8,9,10]]
     ],
     "phantomSlots": [
       [
@@ -1288,32 +976,12 @@
     "footerDisc": "Early Rounds on SEC Network · Semifinals & Championship on ESPN",
     "footerLinks": "SECSports.com &nbsp;|&nbsp; #SECTourney &nbsp;|&nbsp; @SEC",
     "espnDateRange": "20260311-20260315",
-    "roundSlotOrder": [
-      [
-        9,
-        12,
-        11,
-        10
-      ],
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[9,16],[12,13],[11,14],[10,15]],
+      [[8,9,16],[5,12,13],[6,11,14],[7,10,15]],
+      [[1,8,9,16],[4,5,12,13],[3,6,11,14],[2,7,10,15]],
+      [[1,4,5,8,9,12,13,16],[2,3,6,7,10,11,14,15]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]]
     ],
     "seeds": {
       "Florida": 1,
@@ -1348,26 +1016,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Semifinals on ESPNU · Championship on ESPN",
     "footerLinks": "SoConSports.com | #SoConHoops | @SoConSports",
     "espnDateRange": "20260306-20260309",
-    "roundSlotOrder": [
-      [
-        8,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        5,
-        6,
-        7
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9],[7,10]],
+      [[1,8,9],[4,5],[3,6],[2,7,10]],
+      [[1,4,5,8,9],[2,3,6,7,10]],
+      [[1,2,3,4,5,6,7,8,9,10]]
     ],
     "phantomSlots": [
       [
@@ -1406,28 +1059,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Semifinals on ESPNU/ESPN+ · Championship on ESPN2",
     "footerLinks": "Southland.org | #SouthlandStrong | @SouthlandSports",
     "espnDateRange": "20260308-20260311",
-    "roundSlotOrder": [
-      [
-        5,
-        8,
-        6,
-        7
-      ],
-      [
-        4,
-        5,
-        3,
-        6
-      ],
-      [
-        1,
-        4,
-        2,
-        3
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[5,8],[6,7]],
+      [[4,5,8],[3,6,7]],
+      [[1,4,5,8],[2,3,6,7]],
+      [[1,2,3,4,5,6,7,8]]
     ],
     "seeds": {
       "SF Austin": 1,
@@ -1454,26 +1090,11 @@
     "footerDisc": "Opening Round & QF on Midco Sports/Summit League Network · Semifinals & Championship on CBS Sports Network",
     "footerLinks": "TheSummitLeague.org &nbsp;|&nbsp; #SummitMBB &nbsp;|&nbsp; @SummitLeague",
     "espnDateRange": "20260304-20260308",
-    "roundSlotOrder": [
-      [
-        8,
-        5,
-        6,
-        7
-      ],
-      [
-        1,
-        4,
-        3,
-        2
-      ],
-      [
-        1,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[8,9]],
+      [[1,8,9],[4,5],[3,6],[2,7]],
+      [[1,4,5,8,9],[2,3,6,7]],
+      [[1,2,3,4,5,6,7,8,9]]
     ],
     "phantomSlots": [
       [
@@ -1522,46 +1143,14 @@
     "footerDisc": "Early Rounds on ESPN+ · Championship on ESPN2",
     "footerLinks": "SunBeltSports.org | #SBCMBB | @SunBelt",
     "espnDateRange": "20260303-20260309",
-    "roundSlotOrder": [
-      [
-        12,
-        13,
-        11,
-        14
-      ],
-      [
-        9,
-        12,
-        10,
-        11
-      ],
-      [
-        8,
-        9,
-        7,
-        10
-      ],
-      [
-        5,
-        8,
-        6,
-        10
-      ],
-      [
-        4,
-        8,
-        3,
-        10
-      ],
-      [
-        1,
-        8,
-        2,
-        10
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[12,13],[11,14]],
+      [[9,12,13],[10,11,14]],
+      [[8,9,12,13],[7,10,11,14]],
+      [[5,8,9,12,13],[6,7,10,11,14]],
+      [[4,5,8,9,12,13],[3,6,7,10,11,14]],
+      [[1,4,5,8,9,12,13],[2,3,6,7,10,11,14]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12,13,14]]
     ],
     "seeds": {
       "Troy": 1,
@@ -1594,34 +1183,12 @@
     "footerDisc": "Early Rounds on ESPN+ · Championship on ESPNU",
     "footerLinks": "SWAC.org | #SWACMBB | @TheSWAC",
     "espnDateRange": "20260309-20260314",
-    "roundSlotOrder": [
-      [
-        10,
-        11,
-        9,
-        12
-      ],
-      [
-        8,
-        10,
-        7,
-        9
-      ],
-      [
-        1, 8,
-        4, 5,
-        3, 6,
-        2, 7
-      ],
-      [
-        1, 8,
-        4,
-        3,
-        2
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[10,11],[9,12]],
+      [[8,10,11],[7,9,12]],
+      [[1,8,10,11],[4,5],[3,6],[2,7,9,12]],
+      [[1,4,5,8,10,11],[2,3,6,7,9,12]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12]]
     ],
     "phantomSlots": [
       [
@@ -1670,26 +1237,11 @@
     "footerDisc": "Early Rounds on ESPN+ · Championship on ESPN2",
     "footerLinks": "WACSports.com | #WACHoops | @WACsports",
     "espnDateRange": "20260311-20260314",
-    "roundSlotOrder": [
-      [
-        6,
-        7
-      ],
-      [
-        4,
-        5,
-        3,
-        6
-      ],
-      [
-        1,
-        4,
-        2,
-        3
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[6,7]],
+      [[4,5],[3,6,7]],
+      [[1,4,5],[2,3,6,7]],
+      [[1,2,3,4,5,6,7]]
     ],
     "phantomSlots": [
       [
@@ -1721,40 +1273,13 @@
     "footerDisc": "Early Rounds on ESPN+ · Quarterfinals on ESPN2 · Semifinals & Championship on ESPN/2",
     "footerLinks": "WCCSports.com | #WCChoops | @WCChoops",
     "espnDateRange": "20260305-20260310",
-    "roundSlotOrder": [
-      [
-        9,
-        12,
-        10,
-        11
-      ],
-      [
-        8,
-        9,
-        7,
-        11
-      ],
-      [
-        5,
-        8,
-        6,
-        7
-      ],
-      [
-        4,
-        5,
-        3,
-        6
-      ],
-      [
-        1,
-        4,
-        2,
-        3
-      ],
-      [
-        1
-      ]
+    "bracketSlots": [
+      [[9,12],[10,11]],
+      [[8,9,12],[7,10,11]],
+      [[5,8,9,12],[6,7,10,11]],
+      [[4,5,8,9,12],[3,6,7,10,11]],
+      [[1,4,5,8,9,12],[2,3,6,7,10,11]],
+      [[1,2,3,4,5,6,7,8,9,10,11,12]]
     ],
     "seeds": {
       "Gonzaga": 1,

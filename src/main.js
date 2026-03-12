@@ -306,7 +306,7 @@ async function switchConf(id) {
       try {
         const events      = await fetchEvents(conf);
         if (active !== id) return; // user switched away before fetch completed
-        const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null);
+        const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null, conf.bracketSlots || null);
         cache.set(conf.id, { events, bracketData });
         if (hasGameToday(events)) confsWithGameToday.add(conf.id);
         render(bracketData, bracketEl, lastUpdEl);
@@ -326,7 +326,7 @@ async function loadConf(conf) {
 
   try {
     const events      = await fetchEvents(conf);
-    const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null);
+    const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null, conf.bracketSlots || null);
 
     cache.set(conf.id, { events, bracketData });
     if (hasGameToday(events)) confsWithGameToday.add(conf.id);
@@ -403,7 +403,7 @@ async function preloadChampions() {
     if (getCachedChampion(conf.id)) continue; // already final — skip API call
     try {
       const events      = await fetchEvents(conf);
-      const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null);
+      const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null, conf.bracketSlots || null);
       cache.set(conf.id, { events, bracketData });
       if (hasGameToday(events)) confsWithGameToday.add(conf.id);
       updateSidebarChampion(conf.id, bracketData);
