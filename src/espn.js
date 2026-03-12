@@ -243,6 +243,50 @@ export function buildBracketData(events, seedsMap, roundSlotOrder, suppressConne
     if (connectors.length) round.connectors = connectors;
   });
 
+  // Adjust top/bot placement to follow bracket position rather than seed number.
+  // For 2:1 connector rounds: the winner of the earlier (even-indexed) feeder game
+  // should occupy the top slot, matching traditional bracket visual conventions.
+  const gameById = new Map();
+  rounds.forEach(r => r.games.forEach(g => { if (g.id) gameById.set(g.id, g); }));
+
+  rounds.forEach((round, ri) => {
+    const prev = rounds[ri - 1];
+    if (!prev || round.games.length * 2 !== prev.games.length) return;
+    if (suppressConnectors?.includes(ri)) return;
+
+    round.games.forEach(game => {
+      if (!game || game.phantom) return;
+
+      const topConn = round.connectors?.find(c => c.toGame === game.id && c.toSide === 'top');
+      const botConn = round.connectors?.find(c => c.toGame === game.id && c.toSide === 'bot');
+      if (!topConn || !botConn) return;
+
+      const topFeeder = gameById.get(topConn.fromGame);
+      const botFeeder = gameById.get(botConn.fromGame);
+      if (!topFeeder || !botFeeder || topFeeder.phantom || botFeeder.phantom) return;
+
+      const topFeederWinner = topFeeder.winner
+        ? (topFeeder.winner === 'top' ? topFeeder.top.name : topFeeder.bot.name)
+        : null;
+      const botFeederWinner = botFeeder.winner
+        ? (botFeeder.winner === 'top' ? botFeeder.top.name : botFeeder.bot.name)
+        : null;
+
+      const swap = () => {
+        [game.top, game.bot] = [game.bot, game.top];
+        [game.topScore, game.botScore] = [game.botScore, game.topScore];
+        if (game.winner === 'top') game.winner = 'bot';
+        else if (game.winner === 'bot') game.winner = 'top';
+      };
+
+      if (topFeederWinner && game.bot.name === topFeederWinner) {
+        swap(); // top feeder's winner is in the bot slot
+      } else if (!topFeederWinner && botFeederWinner && game.top.name === botFeederWinner) {
+        swap(); // only bot feeder is known, but their winner is in the top slot
+      }
+    });
+  });
+
   // Mark classic SF rounds (2 games, preceded by 4 games, with connectors) with a spacer split.
   // Gated on connectors existing so suppressed rounds keep their normal centered layout.
   rounds.forEach((round, ri) => {
