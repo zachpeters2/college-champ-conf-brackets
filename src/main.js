@@ -296,11 +296,24 @@ async function switchConf(id) {
   statusEl.className = 'status-bar';
 
   if (cache.has(id)) {
-    // Already fetched — render immediately from cache
+    // Render immediately from cache, then silently re-fetch in background
     const cached = cache.get(id);
     render(cached.bracketData, bracketEl, lastUpdEl);
     updateSidebarChampion(id, cached.bracketData);
     scheduleAutoRefresh();
+
+    (async () => {
+      try {
+        const events      = await fetchEvents(conf);
+        if (active !== id) return; // user switched away before fetch completed
+        const bracketData = buildBracketData(events, conf.seeds || null, conf.roundSlotOrder || null, conf.suppressConnectors || null, conf.feedMap || null, conf.phantomSlots || null);
+        cache.set(conf.id, { events, bracketData });
+        if (hasGameToday(events)) confsWithGameToday.add(conf.id);
+        render(bracketData, bracketEl, lastUpdEl);
+        updateSidebarChampion(conf.id, bracketData);
+        scheduleAutoRefresh();
+      } catch { /* silent — stale cache stays rendered */ }
+    })();
   } else {
     await loadConf(conf);
   }
